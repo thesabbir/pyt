@@ -2,4 +2,18 @@
     cursor: pointer;
 }
 
-body { padding-bottom: 70px; }
+body {
+    padding-bottom: 70px;
+}
+
+.table-scrollable {
+    max-height: 580px;
+    overflow-y: scroll;
+    margin-top: 65px;
+}
+.id {
+    border: 1px solid #dddddd;
+}
+.sort a:hover {
+    cursor: pointer;
+}

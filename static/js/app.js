@@ -8,11 +8,18 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             controller : 'Members',
             templateUrl : 'templates/members.html'
         })
+        .otherwise({
+            redirectTo: '/'
+         })
+
 
 }]);
 
-App.controller('AppCtrl', [function () {
-    
+App.controller('AppCtrl', ['$scope', function ($scope) {
+    $scope.sortBy = function (value) {
+         $scope.reverse = !$scope.reverse;
+         $scope.order = value;
+      };
 }]);
 
 App.controller('Members', ['$scope', '$http', function ($scope, $http) {

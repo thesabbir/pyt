@@ -1,7 +1,31 @@
 <div>
     <h1>Members :</h1>
-    <ul ng-repeat="member in members">
-        <li>Name : {{ member.name }}</li>
-        <li>Balance : {{ member.balance }}</li>
-    </ul>
+    <div>
+        search <input type="text" ng-model="search"/>
+    </div>
+    <div class="table-responsive table-scrollable ">
+    <table class="table table-hover id">
+        <tr class="sort" tooltip-append-to-body="true" tooltip-popup-delay='500' tooltip-placement="left"
+            tooltip="Click to Sort">
+            <th class="id"><a ng-click="sortBy('id')">ID</a></th>
+            <th><a ng-click="sortBy('name')">Name</a></th>
+            <th><a ng-click="sortBy('balance')">Balance</a></th>
+            <th><a>Actions</a></th>
+        </tr>
+        <tr ng-repeat="member in members | filter:search | orderBy:order:reverse;">
+
+            <td class="id" ng-bind="member.id"></td>
+            <td ng-bind="member.name"></td>
+            <td ng-bind="member.balance | currency"></td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button ng-click="" class="btn btn-primary ">Edit</button>
+                    <button ng-click="" class="btn btn-default ">Details</button>
+                    <button ng-click="" class="btn btn-danger ">Delete</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</div>
 </div>
