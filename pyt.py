@@ -1,7 +1,9 @@
+from datetime import datetime
 from flask import Flask
 from flask.ext.restless import APIManager
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, Column, Text, DateTime
+from sqlalchemy import Integer, Column, Text, DateTime, ForeignKey, String, func
+from sqlalchemy.orm import relationship, backref
 
 app = Flask(__name__, static_url_path='')
 
@@ -11,28 +13,32 @@ db = SQLAlchemy(app)
 
 class Member(db.Model):
     id = Column(Integer, primary_key=True)
-    name = Column(Text, unique=False)
-    balance = Column(Text, unique=False)
+    name = Column(String)
+    debit = Column(Integer)
+    credit = Column(Integer)
+    meals = relationship('Meal', backref='ref', lazy='dynamic')
 
 
-class Meals(db.Model):
+class Meal(db.Model):
     id = Column(Integer, primary_key=True)
-    date = Column(DateTime, unique=False)
-    total = Column(Integer, unique=False)
-    notes = Column(Text, unique=False)
+    date = Column(DateTime, default=func.now())
+    member = Column(String, ForeignKey('member.name'), nullable=False)
+    number = Column(Integer, nullable=False)
+    notes = Column(Text)
 
 
-class Expesnse(db.Model):
+class Expense(db.Model):
     id = Column(Integer, primary_key=True)
-    total = Column(Integer, unique=False)
-    notes = Column(Text, unique=False)
-    by = Column(Text, unique=False)
+    date = Column(DateTime, default=func.now())
+    amount = Column(Integer, default=0)
+    note = Column(Text)
 
 
 db.create_all()
 
 api_manager = APIManager(app, flask_sqlalchemy_db=db)
 api_manager.create_api(Member, methods=['GET', 'POST', 'PUT', 'DELETE'])
+api_manager.create_api(Meal, methods=['GET', 'POST', 'PUT', 'DELETE'])
 
 
 @app.route('/')
