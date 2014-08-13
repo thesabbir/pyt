@@ -1,9 +1,8 @@
-from datetime import datetime
 from flask import Flask
 from flask.ext.restless import APIManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, Column, Text, DateTime, ForeignKey, String, func
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 app = Flask(__name__, static_url_path='')
 
@@ -16,6 +15,19 @@ class Member(db.Model):
     name = Column(String)
     debits = relationship('Debit', backref='by', lazy='dynamic')
     meals = relationship('Meal', backref='meals', lazy='dynamic')
+
+    def total_debit(self):
+        total = 0
+        for debit in self.debits:
+            total += debit.debit
+        return total
+
+    def total_meal(self):
+        total_meal = 0
+        for meal in self.meals:
+            print meal.number
+            total_meal += meal.number
+        return total_meal
 
 
 class Meal(db.Model):
@@ -37,8 +49,13 @@ class Debit(db.Model):
 db.create_all()
 
 api_manager = APIManager(app, flask_sqlalchemy_db=db)
-api_manager.create_api(Member, methods=['GET', 'POST', 'PUT', 'DELETE'])
-api_manager.create_api(Meal, methods=['GET', 'POST', 'PUT', 'DELETE'])
+
+api_manager.create_api(Member, methods=['GET', 'POST', 'PUT', 'DELETE'],
+                       include_columns=['id', 'name'],
+                       include_methods=['total_debit', 'total_meal'])
+
+api_manager.create_api(Meal, methods=['GET', 'POST', 'PUT', 'DELETE'],  exclude_columns=['meals'])
+
 api_manager.create_api(Debit, methods=['GET', 'POST', 'PUT', 'DELETE'])
 
 
