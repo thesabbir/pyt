@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.restless import APIManager
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, Column, Text
+from sqlalchemy import Integer, Column, Text, DateTime
 
 app = Flask(__name__, static_url_path='')
 
@@ -13,6 +13,20 @@ class Member(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(Text, unique=False)
     balance = Column(Text, unique=False)
+
+
+class Meals(db.Model):
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime, unique=False)
+    total = Column(Integer, unique=False)
+    notes = Column(Text, unique=False)
+
+
+class Expesnse(db.Model):
+    id = Column(Integer, primary_key=True)
+    total = Column(Integer, unique=False)
+    notes = Column(Text, unique=False)
+    by = Column(Text, unique=False)
 
 
 db.create_all()
