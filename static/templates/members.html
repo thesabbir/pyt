@@ -9,6 +9,8 @@
             tooltip="Click to Sort">
             <th class="id"><a ng-click="sortBy('id')">ID</a></th>
             <th><a ng-click="sortBy('name')">Name</a></th>
+            <th><a ng-click="sortBy('debit')">Debit</a></th>
+            <th><a ng-click="sortBy('credit')">Credit</a></th>
             <th><a ng-click="sortBy('balance')">Balance</a></th>
             <th><a>Actions</a></th>
         </tr>
@@ -16,7 +18,9 @@
 
             <td class="id" ng-bind="member.id"></td>
             <td ng-bind="member.name"></td>
-            <td ng-bind="member.balance | currency"></td>
+            <td ng-bind="member.debit | currency"></td>
+            <td ng-bind="member.credit | currency"></td>
+            <td ng-bind="member.balance=(member.debit - member.credit) | currency"></td>
             <td>
                 <div class="btn-group btn-group-xs">
                     <button ng-click="" class="btn btn-primary ">Edit</button>
