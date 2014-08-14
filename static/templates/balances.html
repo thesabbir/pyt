@@ -1,5 +1,5 @@
 <div>
-    <h1>Debits :</h1>
+    <h1>Balance :</h1>
 
     <div>
         search <input type="text" ng-model="search"/>
@@ -12,14 +12,18 @@
                 <th><a ng-click="sortBy('date')">Date</a></th>
                 <th><a ng-click="sortBy('member')">Member</a></th>
                 <th><a ng-click="sortBy('debit')">Debits</a></th>
+                <th><a ng-click="sortBy('credit')">Credits</a></th>
+                <th><a ng-click="sortBy('notes')">Notes</a></th>
                 <th><a>Actions</a></th>
             </tr>
-            <tr ng-repeat="debit in debits | filter:search | orderBy:order:reverse;">
+            <tr ng-repeat="balance in balances | filter:search | orderBy:order:reverse;">
 
-                <td class="id" ng-bind="debit.id"></td>
-                <td ng-bind="debit.date | date:'MM/dd/yyyy'"></td>
-                <td ng-bind="debit.member"></td>
-                <td ng-bind="debit.debit | currency"></td>
+                <td class="id" ng-bind="balance.id"></td>
+                <td ng-bind="balance.date | date:'MM/dd/yyyy'"></td>
+                <td ng-bind="balance.member"></td>
+                <td ng-bind="balance.debit | currency"></td>
+                <td ng-bind="balance.credit | currency"></td>
+                <td ng-bind="balance.notes"></td>
                 <td>
                     <div class="btn-group btn-group-xs">
                         <button ng-click="" class="btn btn-primary ">Edit</button>

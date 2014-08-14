@@ -13,8 +13,8 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'templates/meals.html'
         })
          .when('/debits', {
-            controller: 'Debits',
-            templateUrl: 'templates/debits.html'
+            controller: 'Balance',
+            templateUrl: 'templates/balances.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -40,8 +40,8 @@ App.controller('Members', ['$scope', '$http', function ($scope, $http) {
         $scope.meals = data.objects;
     });
 }])
-    .controller('Debits', ['$scope', '$http', function ($scope, $http) {
-    $http.get("/api/debit").success(function (data) {
-        $scope.debits = data.objects;
+    .controller('Balance', ['$scope', '$http', function ($scope, $http) {
+    $http.get("/api/balance").success(function (data) {
+        $scope.balances = data.objects;
     });
 }])
