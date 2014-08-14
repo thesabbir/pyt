@@ -11,16 +11,17 @@
 </head>
 <body ng-controller="AppCtrl">
 <div class="container">
+    <div>
+        <ul>
+            <li><a href="/#!/">Home</a></li>
+            <li><a href="/#!/meals">Meals</a></li>
+            <li><a href="/#!/balances">Balances</a></li>
+            <li><a href="/#!/manager">Manager</a></li>
+        </ul>
+    </div>
     <div ng-view></div>
 </div>
-<div>
-    <ul>
-        <li><a href="/#!/">Home</a></li>
-        <li><a href="/#!/meals">Meals</a></li>
-        <li><a href="/#!/balances">Balances</a></li>
-        <li><a href="/#!/manager">Manager</a></li>
-    </ul>
-</div>
+
 <script src="js/angular.js"></script>
 <script src="js/angular-route.js"></script>
 <script src="js/ui-bootstrap-tpls-0.11.0.js"></script>
