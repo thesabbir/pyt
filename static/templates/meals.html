@@ -1,5 +1,5 @@
 <div>
-    <h1>Members :</h1>
+    <h1>Meals :</h1>
 
     <div>
         search <input type="text" ng-model="search"/>
@@ -9,17 +9,17 @@
             <tr class="sort" tooltip-append-to-body="true" tooltip-popup-delay='500' tooltip-placement="left"
                 tooltip="Click to Sort">
                 <th class="id"><a ng-click="sortBy('id')">ID</a></th>
-                <th><a ng-click="sortBy('name')">Name</a></th>
-                <th><a ng-click="sortBy('total_debit')">Total Debits</a></th>
-                <th><a ng-click="sortBy('total_meal')">Total Meals</a></th>
+                <th><a ng-click="sortBy('date')">Date</a></th>
+                <th><a ng-click="sortBy('member')">Member</a></th>
+                <th><a ng-click="sortBy('number')">Meals</a></th>
                 <th><a>Actions</a></th>
             </tr>
-            <tr ng-repeat="member in members | filter:search | orderBy:order:reverse;">
+            <tr ng-repeat="meal in meals | filter:search | orderBy:order:reverse;">
 
-                <td class="id" ng-bind="member.id"></td>
-                <td ng-bind="member.name"></td>
-                <td ng-bind="member.total_debit | currency"></td>
-                <td ng-bind="member.total_meal"></td>
+                <td class="id" ng-bind="meal.id"></td>
+                <td ng-bind="meal.date | date:'MM/dd/yyyy'"></td>
+                <td ng-bind="meal.member"></td>
+                <td ng-bind="meal.number"></td>
                 <td>
                     <div class="btn-group btn-group-xs">
                         <button ng-click="" class="btn btn-primary ">Edit</button>
