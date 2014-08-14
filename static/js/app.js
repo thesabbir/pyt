@@ -5,15 +5,15 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider
         .when('/', {
-            controller: 'Members',
+            controller: 'MemberCtrl',
             templateUrl: 'templates/members.html'
         })
         .when('/meals', {
-            controller: 'Meals',
+            controller: 'MealCtrl',
             templateUrl: 'templates/meals.html'
         })
-         .when('/debits', {
-            controller: 'Balance',
+         .when('/balances', {
+            controller: 'BalanceCtrl',
             templateUrl: 'templates/balances.html'
         })
         .otherwise({
@@ -28,19 +28,18 @@ App.controller('AppCtrl', ['$scope', function ($scope) {
         $scope.reverse = !$scope.reverse;
         $scope.order = value;
     };
-}]);
-
-App.controller('Members', ['$scope', '$http', function ($scope, $http) {
+}])
+    .controller('MemberCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get("/api/member").success(function (data) {
         $scope.members = data.objects;
     });
 }])
-    .controller('Meals', ['$scope', '$http', function ($scope, $http) {
+    .controller('MealCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get("/api/meal").success(function (data) {
         $scope.meals = data.objects;
     });
 }])
-    .controller('Balance', ['$scope', '$http', function ($scope, $http) {
+    .controller('BalanceCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get("/api/balance").success(function (data) {
         $scope.balances = data.objects;
     });
