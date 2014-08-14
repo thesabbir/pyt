@@ -3,7 +3,7 @@
         <tr class="sort" tooltip-append-to-body="true" tooltip-popup-delay='500' tooltip-placement="left"
             tooltip="Click to Sort">
             <th class="id"><a ng-click="sortBy('id')">ID</a></th>
-            <th><a ng-click="sortBy('name')">Name</a></th>
+            <th><a ng-click="sortBy('name')">Mnager Name</a></th>
             <th><a ng-click="sortBy('total_debit')">Total Debit</a></th>
             <th><a ng-click="sortBy('total_credit')">Total Credit</a></th>
             <th><a ng-click="sortBy('total_meal')">Total Meal</a></th>
@@ -17,7 +17,7 @@
             <td ng-bind="manager.total_debit | currency"></td>
             <td ng-bind="manager.total_credit | currency"></td>
             <td ng-bind="manager.total_meal"></td>
-            <td ng-bind="manager.meal_rate"></td>
+            <td ng-bind="manager.meal_rate | currency"></td>
             <td>
                 <div class="btn-group btn-group-xs">
                     <button ng-click="" class="btn btn-primary ">Edit</button>
