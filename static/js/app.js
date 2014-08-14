@@ -12,6 +12,10 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             controller: 'Meals',
             templateUrl: 'templates/meals.html'
         })
+         .when('/debits', {
+            controller: 'Debits',
+            templateUrl: 'templates/debits.html'
+        })
         .otherwise({
             redirectTo: '/'
         })
@@ -30,12 +34,14 @@ App.controller('Members', ['$scope', '$http', function ($scope, $http) {
     $http.get("/api/member").success(function (data) {
         $scope.members = data.objects;
     });
-}]);
-
-
-App.controller('Meals', ['$scope', '$http', function ($scope, $http) {
+}])
+    .controller('Meals', ['$scope', '$http', function ($scope, $http) {
     $http.get("/api/meal").success(function (data) {
         $scope.meals = data.objects;
-        console.log(data.objects);
     });
-}]);
+}])
+    .controller('Debits', ['$scope', '$http', function ($scope, $http) {
+    $http.get("/api/debit").success(function (data) {
+        $scope.debits = data.objects;
+    });
+}])
