@@ -53,24 +53,59 @@ class Balance(db.Model):
     manager = Column(String, ForeignKey('manager.id'), default=0)
     notes = Column(Text)
 
+
 class Manager(db.Model):
     id = Column(Integer, primary_key=True)
+    name = Column(String, default="Fayez Bhaban")
     balances = relationship('Balance', backref='balances', lazy='dynamic')
     meals = relationship('Meal', backref='meals', lazy='dynamic')
 
+    def total_debit(self):
+        total_debit = 0
+        for balance in self.balances:
+            total_debit += balance.debit
+        return total_debit
+
+    def total_credit(self):
+        total_credit = 0
+        for balance in self.balances:
+            total_credit += balance.credit
+        return total_credit
+
+    def total_meal(self):
+        total_meal = 0
+        for meal in self.meals:
+            total_meal += meal.number
+        return total_meal
+
+    def meal_rate(self):
+        meal_rate = self.total_credit() / self.total_meal()
+        return  meal_rate
 
 db.create_all()
 
 api_manager = APIManager(app, flask_sqlalchemy_db=db)
 
-api_manager.create_api(Member, methods=['GET', 'POST', 'PUT', 'DELETE'],
-                       exclude_columns=['meals', 'balances'],
-                       include_methods=['total_debit', 'total_credit', 'total_meal'])
+api_manager.create_api(
+    Member, methods=['GET', 'POST', 'PUT', 'DELETE'],
+    exclude_columns=['meals', 'balances'],
+    include_methods=['total_debit', 'total_credit', 'total_meal']
+)
 
-api_manager.create_api(Meal, methods=['GET', 'POST', 'PUT', 'DELETE'], exclude_columns=['by'])
+api_manager.create_api(
+    Meal, methods=['GET', 'POST', 'PUT', 'DELETE'],
+    exclude_columns=['by']
+)
 
-api_manager.create_api(Balance, methods=['GET', 'POST', 'PUT', 'DELETE'])
-api_manager.create_api(Manager, methods=['GET'])
+api_manager.create_api(
+    Balance, methods=['GET', 'POST', 'PUT', 'DELETE']
+)
+
+api_manager.create_api(
+    Manager, methods=['GET'],
+    exclude_columns=['meals', 'balances'],
+    include_methods=['total_debit', 'total_credit', 'total_meal', 'meal_rate']
+)
 
 
 @app.route('/')
