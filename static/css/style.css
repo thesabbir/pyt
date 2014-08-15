@@ -17,3 +17,9 @@ body {
 .sort a:hover {
     cursor: pointer;
 }
+
+h1 .welcome {
+    font-size: 80px;
+    color: #222222;
+
+}

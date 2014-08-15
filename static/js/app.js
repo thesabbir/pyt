@@ -5,6 +5,10 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider
         .when('/', {
+            controller : 'HomeCtrl',
+            templateUrl : 'templates/home.html'
+        })
+        .when('/members', {
             controller: 'MemberCtrl',
             templateUrl: 'templates/members.html'
         })
@@ -33,6 +37,9 @@ App.controller('AppCtrl', ['$scope', function ($scope) {
         $scope.order = value;
     };
 }])
+    .controller('HomeCtrl', [function ($scope) {
+
+    }])
     .controller('MemberCtrl', ['$scope', '$http', function ($scope, $http) {
         $http.get("/api/member").success(function (data) {
             $scope.members = data.objects;
