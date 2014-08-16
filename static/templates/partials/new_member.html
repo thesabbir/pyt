@@ -1,0 +1,29 @@
+<form class="form-horizontal">
+    <div class="modal-header">
+        <h3 class="title">Add New Member</h3>
+    </div>
+    <fieldset>
+
+        <!-- Form Name -->
+        <!-- Text input-->
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Name</label>
+
+                <div class="col-md-5">
+                    <input id="textinput" name="textinput" type="text" placeholder="Members Name"
+                           class="form-control input-md" required ng-model="member.name">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <!--<input type="hidden" name="_csrf" ng-value="_csrf" />-->
+            <input class="btn btn-primary" type="submit" ng-click="save(member)" value="Save">
+            <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </fieldset>
+</form>
+

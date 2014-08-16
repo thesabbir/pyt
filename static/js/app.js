@@ -5,8 +5,8 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider
         .when('/', {
-            controller : 'HomeCtrl',
-            templateUrl : 'templates/home.html'
+            controller: 'HomeCtrl',
+            templateUrl: 'templates/home.html'
         })
         .when('/members', {
             controller: 'MemberCtrl',
@@ -31,7 +31,7 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 }]);
 
-App.controller('AppCtrl', ['$scope', function ($scope) {
+App.controller('AppCtrl', ['$scope', '$modal', function ($scope, $modal) {
     $scope.sortBy = function (value) {
         $scope.reverse = !$scope.reverse;
         $scope.order = value;
@@ -40,10 +40,25 @@ App.controller('AppCtrl', ['$scope', function ($scope) {
     .controller('HomeCtrl', [function ($scope) {
 
     }])
-    .controller('MemberCtrl', ['$scope', '$http', function ($scope, $http) {
-        $http.get("/api/member").success(function (data) {
+    .controller('MemberCtrl', ['$scope', '$http', '$modal', function ($scope, $http, $modal) {
+        var api = "/api/member";
+
+        $scope.addNew = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'templates/partials/new_member.html',
+                controller: 'AddNewCtrl',
+                resolve: {
+                    api: function () {
+                        return api;
+                    }}
+
+            });
+        }
+
+        $http.get(api).success(function (data) {
             $scope.members = data.objects;
         });
+
     }])
     .controller('MealCtrl', ['$scope', '$http', function ($scope, $http) {
         $http.get("/api/meal").success(function (data) {
@@ -59,4 +74,15 @@ App.controller('AppCtrl', ['$scope', function ($scope) {
         $http.get("/api/manager").success(function (data) {
             $scope.managers = data.objects;
         })
+    }])
+    .controller('AddNewCtrl', ['$scope', '$http', '$modalInstance', 'api', function ($scope, $http, $modalInstance, api) {
+        $scope.save = function (data) {
+            $http.post(api, JSON.stringify(data)).success(function (reso) {
+                $modalInstance.close();
+            })
+        }
+        //TODO: Auto reload models after save
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        }
     }]);
