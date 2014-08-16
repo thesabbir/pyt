@@ -1,4 +1,10 @@
 var App = angular.module("Pyt", ['ngRoute', 'ui.bootstrap']);
+App.filter('bdt', function () {
+    return function (text) {
+        var t = text + '.00 BDT';
+        return t;
+    };
+});
 
 App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
@@ -16,9 +22,9 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             controller: 'MealCtrl',
             templateUrl: 'templates/meals.html'
         })
-        .when('/balances', {
-            controller: 'BalanceCtrl',
-            templateUrl: 'templates/balances.html'
+        .when('/journal', {
+            controller: 'JournalCtrl',
+            templateUrl: 'templates/journal.html'
         })
         .when('/manager', {
             controller: 'ManageCtrl',
@@ -32,6 +38,7 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 App.controller('AppCtrl', ['$scope', '$modal', function ($scope, $modal) {
+    $scope.global_currency = "BDT ";
     $scope.order = 'id';
     $scope.sortBy = function (value) {
         $scope.reverse = !$scope.reverse;
@@ -66,9 +73,9 @@ App.controller('AppCtrl', ['$scope', '$modal', function ($scope, $modal) {
             $scope.meals = data.objects;
         });
     }])
-    .controller('BalanceCtrl', ['$scope', '$http', function ($scope, $http) {
-        $http.get("/api/balance").success(function (data) {
-            $scope.balances = data.objects;
+    .controller('JournalCtrl', ['$scope', '$http', function ($scope, $http) {
+        $http.get("/api/journal").success(function (data) {
+            $scope.journal = data.objects;
         });
     }])
     .controller('ManageCtrl', ['$scope', '$http', function ($scope, $http) {

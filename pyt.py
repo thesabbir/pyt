@@ -113,6 +113,11 @@ api_manager.create_api(
     exclude_columns=['expenses', 'funds', 'meals'],
     include_methods=['total_funds', 'total_expense', 'total_meal', 'meal_rate']
 )
+api_manager.create_api(
+    Manager,
+    methods=['GET'],
+    collection_name='journal'
+)
 
 
 @app.route('/')

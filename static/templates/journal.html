@@ -10,14 +10,14 @@
             <th><a ng-click="sortBy('notes')">Notes</a></th>
             <th><a>Actions</a></th>
         </tr>
-        <tr ng-repeat="balance in balances | filter:search | orderBy:order:reverse;">
+        <tr ng-repeat="record in journal | filter:search | orderBy:order:reverse;">
 
-            <td class="id" ng-bind="balance.id"></td>
-            <td ng-bind="balance.date | date:'MM/dd/yyyy'"></td>
-            <td ng-bind="balance.member"></td>
-            <td ng-bind="balance.debit | currency"></td>
-            <td ng-bind="balance.credit | currency"></td>
-            <td ng-bind="balance.notes"></td>
+            <td class="id" ng-bind="record.id"></td>
+            <td ng-bind="record.date | date:'MM/dd/yyyy'"></td>
+            <td ng-bind="record.member"></td>
+            <td ng-bind="record.debit | currency"></td>
+            <td ng-bind="record.credit | currency"></td>
+            <td ng-bind="record.notes"></td>
             <td>
                 <div class="btn-group btn-group-xs">
                     <button ng-click="" class="btn btn-primary ">Edit</button>

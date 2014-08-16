@@ -14,8 +14,8 @@
 
             <td class="id" ng-bind="manager.id"></td>
             <td ng-bind="manager.name"></td>
-            <td ng-bind="manager.total_debit | currency"></td>
-            <td ng-bind="manager.total_credit | currency"></td>
+            <td ng-bind="manager.total_funds | bdt"></td>
+            <td ng-bind="manager.total_expense | bdt"></td>
             <td ng-bind="manager.total_meal"></td>
             <td ng-bind="manager.meal_rate | currency"></td>
             <td>

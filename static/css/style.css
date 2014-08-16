@@ -23,3 +23,7 @@ h1 .welcome {
     color: #222222;
 
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
