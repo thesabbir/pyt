@@ -32,6 +32,7 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 App.controller('AppCtrl', ['$scope', '$modal', function ($scope, $modal) {
+    $scope.order = 'id';
     $scope.sortBy = function (value) {
         $scope.reverse = !$scope.reverse;
         $scope.order = value;
