@@ -8,7 +8,7 @@ App.filter('bdt', function () {
 
 App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!');
-
+//    TODO: Start Invoice Section
     $routeProvider
         .when('/', {
             controller: 'HomeCtrl',
