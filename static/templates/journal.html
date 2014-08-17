@@ -1,29 +1,5 @@
 <div class="table-responsive table-scrollable ">
     <table class="table table-hover id">
-        <tr class="sort" tooltip-append-to-body="true" tooltip-popup-delay='500' tooltip-placement="left"
-            tooltip="Click to Sort">
-            <th class="id"><a ng-click="sortBy('id')">ID</a></th>
-            <th><a ng-click="sortBy('date')">Date</a></th>
-            <th><a ng-click="sortBy('member')">Member</a></th>
-            <th><a ng-click="sortBy('debit')">Debits</a></th>
-            <th><a ng-click="sortBy('credit')">Credits</a></th>
-            <th><a ng-click="sortBy('notes')">Notes</a></th>
-            <th><a>Actions</a></th>
-        </tr>
-        <tr ng-repeat="record in journal | filter:search | orderBy:order:reverse;">
-
-            <td class="id" ng-bind="record.id"></td>
-            <td ng-bind="record.date | date:'MM/dd/yyyy'"></td>
-            <td ng-bind="record.member"></td>
-            <td ng-bind="record.debit | currency"></td>
-            <td ng-bind="record.credit | currency"></td>
-            <td ng-bind="record.notes"></td>
-            <td>
-                <div class="btn-group btn-group-xs">
-                    <button ng-click="" class="btn btn-primary ">Edit</button>
-                    <button ng-click="" class="btn btn-danger ">Delete</button>
-                </div>
-            </td>
-        </tr>
+        Hole New Section !!
     </table>
 </div>
