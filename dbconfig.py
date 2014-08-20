@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, func
 from sqlalchemy.orm import relationship
 from pyt import app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/pyt.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pyt.db'
 
 
 db = SQLAlchemy(app)
